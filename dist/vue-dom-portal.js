@@ -1,5 +1,5 @@
 /*!
- * vue-dom-portal v0.1.0 
+ * vue-dom-portal v0.1.1 
  * (c) 2017 Caleb Roseland
  * Released under the MIT License.
  */
@@ -51,7 +51,7 @@ function plugin (Vue, ref) {
   Vue.directive(name, directive);
 }
 
-plugin.version = require('./package.json').version;
+plugin.version = '0.1.1';
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(plugin);

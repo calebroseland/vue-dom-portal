@@ -1,7 +1,7 @@
 {
   "name": "vue-dom-portal",
   "description": "An escape hatch directive for DOM Elements in Vue.js components.",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "author": {
     "name": "Caleb Roseland",
     "email": "caleb@calebroseland.com"

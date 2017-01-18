@@ -1,5 +1,5 @@
 /*!
- * vue-dom-portal v0.1.1 
+ * vue-dom-portal v0.1.4 
  * (c) 2017 Caleb Roseland
  * Released under the MIT License.
  */
@@ -7,6 +7,8 @@
 
 /**
  * Get target DOM Node
+ * @param {(Node|string|Boolean)} [node=document.body] DOM Node, CSS selector, or Boolean
+ * @return {Node} The target that the el will be appended to
  */
 function getTarget (node) {
   if ( node === void 0 ) node = document.body;
@@ -18,45 +20,46 @@ function getTarget (node) {
 var homes = new Map();
 
 var directive = {
-  inserted: function inserted (el, ref, ref$1) {
+  inserted: function inserted (el, ref, vnode) {
     var value = ref.value;
-    var key = ref$1.key;
 
-    // el is home
     var parentNode = el.parentNode;
-    var home = document.createComment();
-
-    parentNode.replaceChild(home, el); // moving out, el is no longer in the document
-
-    if (!homes.has(key)) { homes.set(key, { parentNode: parentNode, home: home }); } // remember where home is
+    var home = document.createComment('');
+    var hasMovedOut = false;
 
     if (value !== false) {
-      getTarget(value).appendChild(el); // moving out
+      parentNode.replaceChild(home, el); // moving out, el is no longer in the document
+      getTarget(value).appendChild(el); // moving into new place
+      hasMovedOut = true;
     }
+
+    if (!homes.has(el)) { homes.set(el, { parentNode: parentNode, home: home, hasMovedOut: hasMovedOut }); } // remember where home is or should be
   },
-  update: function update (el, ref, ref$1) {
+  componentUpdated: function componentUpdated (el, ref) {
     var value = ref.value;
-    var key = ref$1.key;
-
-    var ref$2 = homes.get(key);
-    var parentNode = ref$2.parentNode;
-    var home = ref$2.home;
-
-    if (value === false) {
-      parentNode.replaceChild(el, home); // moving home
-      homes.delete(key); // no need to remember anymore
-    } else {
-      getTarget(value).appendChild(el); // moving somewhere else
-    }
-  },
-  unbind: function unbind (el, binding, ref) {
-    var key = ref.key;
-
-    var ref$1 = homes.get(key);
+ // need to make sure children are done updating (vs. `update`)
+    var ref$1 = homes.get(el);
     var parentNode = ref$1.parentNode;
     var home = ref$1.home;
-    parentNode.replaceChild(el, home); // moving home
-    homes.delete(key); // no need to remember anymore
+    var hasMovedOut = ref$1.hasMovedOut; // recall where home is
+
+    if (!hasMovedOut && value) {
+      // never moved out on initial insert; value must have started out false
+      parentNode.replaceChild(home, el);
+      getTarget(value).appendChild(el); // moving into new place
+      homes.set(el, Object.assign.apply(Object, [ {} ].concat( homes.get(el), [{ hasMovedOut: true }] ))); // indicate that we've moved out
+    } else if (hasMovedOut && value === false) {
+      // already moved out, moving back home
+      parentNode.replaceChild(el, home);
+      homes.set(el, Object.assign({}, homes.get(el), { hasMovedOut: false })); // indicate that we've moved back home
+      // homes.delete(el)
+    } else if (value) {
+      // already moved out, moving somewhere else
+      getTarget(value).appendChild(el);
+    }
+  },
+  unbind: function unbind (el, binding) {
+    homes.delete(el); // no need to remember anymore
   }
 };
 

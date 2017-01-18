@@ -31,11 +31,11 @@ const directive = {
       // never moved out on initial insert; value must have started out false
       parentNode.replaceChild(home, el)
       getTarget(value).appendChild(el) // moving into new place
-      homes.set(el, { ...homes.get(el), hasMovedOut: true }) // indicate that we've moved out
+      homes.set(el, Object.assign({}, ...homes.get(el), { hasMovedOut: true })) // indicate that we've moved out
     } else if (hasMovedOut && value === false) {
       // already moved out, moving back home
       parentNode.replaceChild(el, home)
-      homes.set(el, { ...homes.get(el), hasMovedOut: false }) // indicate that we've moved back home
+      homes.set(el, Object.assign({}, homes.get(el), { hasMovedOut: false })) // indicate that we've moved back home
       // homes.delete(el)
     } else if (value) {
       // already moved out, moving somewhere else
@@ -51,7 +51,7 @@ function plugin (Vue, { name = 'dom-portal' } = {}) {
   Vue.directive(name, directive)
 }
 
-plugin.version = '0.1.2'
+plugin.version = '0.1.4'
 
 export default plugin
 

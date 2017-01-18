@@ -43,7 +43,7 @@ which must be of the following:
 <!--nothing will happen, left in-place-->
 <div v-dom-portal="false"></div>
 
-<!--will appended to document.querySelector(#app) -->
+<!--will be appended to document.querySelector(#app) -->
 <div v-dom-portal="'#app'"></div>
 ```
 

@@ -75,7 +75,7 @@
     "changelog": "conventional-changelog -i CHANGELOG.md -s -p angular",
     "release": "conventional-github-releaser -p angular",
     "clean": "rm -rf coverage && rm -rf dist/*.js* && rm ./*.log",
-    "dev": "webpack-dev-server --quiet --config config/webpack.dev.conf.js --host 0.0.0.0",
+    "dev": "webpack-dev-server --quiet --config config/webpack.dev.conf.js --host 127.0.0.1",
     "docs": "gitbook serve ./gitbook ./docs",
     "docs:build": "gitbook build ./gitbook ./docs",
     "docs:install": "gitbook install ./gitbook",

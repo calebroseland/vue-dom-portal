@@ -163,82 +163,6 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="vue-dom-portal">vue-dom-portal</h1>
-<p><a href="https://www.npmjs.com/package/vue-dom-portal" target="_blank"><img src="https://img.shields.io/npm/v/vue-dom-portal.svg" alt="npm"></a>
-<a href="https://vuejs.org/" target="_blank"><img src="https://img.shields.io/badge/vue-2.x-brightgreen.svg" alt="vue2"></a></p>
-<p>An escape hatch for DOM Elements in Vue.js components.</p>
-<p>The directive <code>v-dom-portal</code> will move DOM Nodes from their current place in a Vue component to a target DOM Node via <code>appendChild</code>.
-Similar to <a href="https://github.com/rhyzx/vue-transfer-dom" target="_blank">vue-transfer-dom</a>, but updated for <code>vue@2.x</code></p>
-<h2 id="setup">Setup</h2>
-<pre><code>npm install vue-dom-portal --save
-</code></pre><pre><code>import DomPortal from &apos;vue-dom-portal&apos;
-Vue.use(DomPortal)
-</code></pre><h2 id="usage">Usage</h2>
-<p>The <code>target</code> is the DOM Node that the target will be appened to.
-To determine this, we can pass a <code>value</code> to the directive,
-which must be of the following:</p>
-<ul>
-<li><code>String</code>- this will be passed to <code>document.querySelector(value)</code> to determine the <code>target</code></li>
-<li><code>DOM Node</code> - this will skip the <code>querySelector</code> call and set the <code>target</code> explicitly</li>
-<li><code>Boolean</code> - will either appened to <code>document.body</code> if <code>true</code>, or return to where it came from if <code>false</code></li>
-<li><code>undefined</code> - will behave as <code>true</code>, appending to <code>document.body</code></li>
-</ul>
-<pre><code>&lt;!--will be appended to document.body--&gt;
-&lt;div v-dom-portal&gt;&lt;/div&gt;
-&lt;div v-dom-portal=&quot;true&quot;&gt;&lt;/div&gt;
-
-&lt;!--nothing will happen, left in-place--&gt;
-&lt;div v-dom-portal=&quot;false&quot;&gt;&lt;/div&gt;
-
-&lt;!--will appended to document.querySelector(#app) --&gt;
-&lt;div v-dom-portal=&quot;&apos;#app&apos;&quot;&gt;&lt;/div&gt;
-</code></pre><p>If you can&apos;t make up your mind on where you want the DOM Node to go,
-you can toss it around the page at will with a variable.</p>
-<pre><code>const vm = new Vue({
-  template: `
-    &lt;div&gt;
-      &lt;div v-dom-portal=&quot;selector&quot;&gt;&lt;/div&gt;
-    &lt;/div&gt;
-  `,
-  data: {
-    selector: &apos;body&apos;
-  }
-})
-
-setTimeout(() =&gt; {
-  vm.selector = &apos;#app&apos;
-}, 500)
-
-setTimeout(() =&gt; {
-  vm.selector = false
-}, 1000)
-
-setTimeout(() =&gt; {
-  vm.selector = false
-}, 1500)
-</code></pre><p>Since it&apos;s just a simple directive, it still works with transitions and directives.</p>
-<pre><code>const vm = new Vue({
-  template: `
-    &lt;div&gt;
-      &lt;transition name=&quot;fade&quot;&gt;
-        &lt;div v-dom-portal=&quot;selector&quot; v-show=&quot;isVisible&quot; class=&quot;overlay&quot;&gt;&lt;/div&gt;
-      &lt;/transition&gt;
-    &lt;/div&gt;
-  `,
-  data: {
-    selector: &apos;body&apos;,
-    isVisible: false
-  }
-})
-</code></pre><!--
-## <img align='absmiddle' alt=':book:' class='emoji' src='/gitbook/gitbook-plugin-advanced-emoji/emojis/book.png' title=':book:' /> Documentation
-See [here](http://calebroseland.github.io/vue-dom-portal/)
-
-## <img align='absmiddle' alt=':scroll:' class='emoji' src='/gitbook/gitbook-plugin-advanced-emoji/emojis/scroll.png' title=':scroll:' /> Changelog
-Details changes for each release are documented in the [CHANGELOG.md](https://github.com/calebroseland/vue-dom-portal/blob/dev/CHANGELOG.md).-->
-<p>Use at your own risk! No tests have been written, but it seems to be working.</p>
-<p>If you find any problems please write up an issue!</p>
-<h2 id="license"><img align="absmiddle" alt=":copyright:" class="emoji" src="gitbook/gitbook-plugin-advanced-emoji/emojis/copyright.png" title=":copyright:"> License</h2>
-<p><a href="http://opensource.org/licenses/MIT" target="_blank">MIT</a></p>
 
                                 
                                 </section>
@@ -278,7 +202,7 @@ Details changes for each release are documented in the [CHANGELOG.md](https://gi
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Installation","level":"1.2","depth":1,"path":"installation.md","ref":"installation.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","github","advanced-emoji@0.2.1"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/calebroseland/vue-dom-portal/"},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/calebroseland/vue-dom-portal/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"README.md","mtime":"2017-01-18T06:34:01.208Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-18T06:35:00.983Z"},"basePath":".","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Installation","level":"1.2","depth":1,"path":"installation.md","ref":"installation.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","github","advanced-emoji@0.2.1"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/calebroseland/vue-dom-portal/"},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/calebroseland/vue-dom-portal/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"README.md","mtime":"2017-01-18T06:39:22.167Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-18T18:13:09.176Z"},"basePath":".","book":{"language":"en"}});
         });
     </script>
 </div>

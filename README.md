@@ -21,8 +21,6 @@ Vue.use(DomPortal)
 ```
 
 
-
-
 ## Usage
 
 

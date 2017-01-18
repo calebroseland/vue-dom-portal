@@ -48,7 +48,7 @@ which must be of the following:
 ```
 
 If you can't make up your mind on where you want the DOM Node to go,
-you can toss it around the page at will.
+you can toss it around the page at will with a variable.
 
 ```
 const vm = new Vue({
@@ -61,6 +61,7 @@ const vm = new Vue({
     selector: 'body'
   }
 })
+
 setTimeout(() => {
   vm.selector = '#app'
 }, 500)
@@ -68,6 +69,11 @@ setTimeout(() => {
 setTimeout(() => {
   vm.selector = false
 }, 1000)
+
+setTimeout(() => {
+  vm.selector = false
+}, 1500)
+
 ```
 
 Since it's just a simple directive, it still works with transitions and directives.
@@ -95,7 +101,9 @@ See [here](http://calebroseland.github.io/vue-dom-portal/)
 ## :scroll: Changelog
 Details changes for each release are documented in the [CHANGELOG.md](https://github.com/calebroseland/vue-dom-portal/blob/dev/CHANGELOG.md).-->
 
+Use at your own risk! No tests have been written, but it seems to be working.
 
+If you find any problems please write up an issue!
 
 
 ## :copyright: License

@@ -1,0 +1,10 @@
+{
+  "env": {
+    "jasmine": true
+  },
+  "globals": {
+    "waitForUpdate": true,
+    "assert": true
+  },
+  "extends": "vue"
+}

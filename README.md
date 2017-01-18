@@ -71,14 +71,13 @@ setTimeout(() => {
 }, 1000)
 
 setTimeout(() => {
-  vm.selector = false
+  vm.selector = '#another-id'
 }, 1500)
 
 ```
 
 Since it's just a simple directive, it still works with transitions and directives.
 
-```
 const vm = new Vue({
   template: `
     <div>

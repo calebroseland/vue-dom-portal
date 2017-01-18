@@ -43,7 +43,7 @@ which must be of the following:
 <!--nothing will happen, left in-place-->
 <div v-dom-portal="false"></div>
 
-<!--will be appended to document.querySelector(#app) -->
+<!--will be appended to document.querySelector('#app') -->
 <div v-dom-portal="'#app'"></div>
 ```
 
@@ -77,7 +77,7 @@ setTimeout(() => {
 ```
 
 Since it's just a simple directive, it still works with transitions and directives.
-
+```
 const vm = new Vue({
   template: `
     <div>
@@ -102,7 +102,7 @@ Details changes for each release are documented in the [CHANGELOG.md](https://gi
 
 Use at your own risk! No tests have been written, but it seems to be working.
 
-If you find any problems please write up an issue!
+If you find any problems please write up an issue.
 
 
 ## :copyright: License

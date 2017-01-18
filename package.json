@@ -82,7 +82,6 @@
     "lint": "eslint src test config",
     "test": "npm run lint && npm run test:cover",
     "test:cover": "karma start config/karma.cover.conf.js",
-    "test:unit": "karma start config/karma.unit.conf.js",
-    "testing": "get CONVENTIONAL_GITHUB_RELEASER_TOKEN"
+    "test:unit": "karma start config/karma.unit.conf.js"
   }
 }

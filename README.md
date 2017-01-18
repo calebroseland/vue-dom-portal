@@ -6,15 +6,13 @@
 An escape hatch for DOM Elements in Vue.js components.
 
 The directive `v-dom-portal` will move DOM Nodes from their current place in a Vue component to a target DOM Node via `appendChild`.
-Similar to [vue-transfer-dom](https://github.com/rhyzx/vue-transfer-dom), but updated for `vue@2.x`
+Similar to [vue-transfer-dom](https://github.com/rhyzx/vue-transfer-dom), but updated for `vue@2.x`.
 
 ## Setup
 
 ```
 npm install vue-dom-portal --save
 ```
-
-
 ```
 import DomPortal from 'vue-dom-portal'
 Vue.use(DomPortal)
@@ -24,12 +22,12 @@ Vue.use(DomPortal)
 ## Usage
 
 
-The `target` is the DOM Node that the target will be appened to.
-To determine this, we can pass a `value` to the directive,
-which must be of the following:
+The `target` is the DOM Node that the element will be appened to, it defaults to `document.body`.
+Otherwise we can manually set this, or even pass a Boolean to dynamically move it around.
 
-- `String`- this will be passed to `document.querySelector(value)` to determine the `target`
-- `DOM Node` - this will skip the `querySelector` call and set the `target` explicitly
+#### `target` can be any the following types:
+- `string` - this will be passed to `document.querySelector` to find the `target`
+- `Node` - A DOM Node or Element if you really want to specify it explitly..
 - `Boolean` - will either appened to `document.body` if `true`, or return to where it came from if `false`
 - `undefined` - will behave as `true`, appending to `document.body`
 
@@ -52,24 +50,24 @@ you can toss it around the page at will with a variable.
 const vm = new Vue({
   template: `
     <div>
-      <div v-dom-portal="selector"></div>
+      <div v-dom-portal="target"></div>
     </div>
   `,
   data: {
-    selector: 'body'
+    target: 'body'
   }
 })
 
 setTimeout(() => {
-  vm.selector = '#app'
+  vm.target = '#app'
 }, 500)
 
 setTimeout(() => {
-  vm.selector = false
+  vm.target = false
 }, 1000)
 
 setTimeout(() => {
-  vm.selector = '#another-id'
+  vm.target = '#another-id'
 }, 1500)
 
 ```
@@ -80,13 +78,15 @@ const vm = new Vue({
   template: `
     <div>
       <transition name="fade">
-        <div v-dom-portal="selector" v-show="isVisible" class="overlay"></div>
+        <div v-dom-portal="target" v-show="isShown" class="overlay">
+          <img src="image.png" alt="Look, Ma, no z-index problems!">
+        </div>
       </transition>
     </div>
   `,
   data: {
-    selector: 'body',
-    isVisible: false
+    target: 'body',
+    isShown: true
   }
 })
 ```

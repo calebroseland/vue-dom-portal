@@ -24,7 +24,7 @@ var directive = {
 
     // el is home
     var parentNode = el.parentNode;
-    var home = document.createCommend('');
+    var home = document.createComment();
 
     parentNode.replaceChild(home, el); // moving out, el is no longer in the document
 

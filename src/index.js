@@ -12,7 +12,7 @@ const directive = {
   inserted (el, { value }, { key }) {
     // el is home
     const { parentNode } = el
-    const home = document.createCommend('')
+    const home = document.createComment()
 
     parentNode.replaceChild(home, el) // moving out, el is no longer in the document
 

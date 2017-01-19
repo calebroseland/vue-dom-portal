@@ -28,16 +28,18 @@ const directive = {
     const { parentNode, home, hasMovedOut } = homes.get(el) // recall where home is
 
     if (!hasMovedOut && value) {
+      // remove from document and leave placeholder
+      parentNode.replaceChild(home, el)
+      // append to target
+      getTarget(value).appendChild(el)
 
-      parentNode.replaceChild(home, el) // remove from document and leave placeholder
-      getTarget(value).appendChild(el) // append to target
       homes.set(el, Object.assign({}, homes.get(el), { hasMovedOut: true }))
     } else if (hasMovedOut && value === false) {
       // previously moved, coming back home
       parentNode.replaceChild(el, home)
       homes.set(el, Object.assign({}, homes.get(el), { hasMovedOut: false }))
     } else if (value) {
-      // already moved, moving somewhere else
+      // already moved, going somewhere else
       getTarget(value).appendChild(el)
     }
   },
@@ -50,7 +52,7 @@ function plugin (Vue, { name = 'dom-portal' } = {}) {
   Vue.directive(name, directive)
 }
 
-plugin.version = '0.1.5'
+plugin.version = '0.1.6'
 
 export default plugin
 

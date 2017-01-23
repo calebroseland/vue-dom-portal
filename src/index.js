@@ -75,7 +75,7 @@ function plugin (Vue, { name = 'dom-portal' } = {}) {
   Vue.directive(name, directive)
 }
 
-plugin.version = '0.1.7'
+plugin.version = '0.1.6'
 
 export default plugin
 

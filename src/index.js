@@ -65,8 +65,6 @@ const directive = {
     }
   },
   unbind (el, { value }) {
-    const { hasMovedOut } = homes.get(el) // recall where home is
-    if (hasMovedOut) el.parentNode.removeChild(el)
     homes.delete(el)
   }
 }
@@ -75,7 +73,7 @@ function plugin (Vue, { name = 'dom-portal' } = {}) {
   Vue.directive(name, directive)
 }
 
-plugin.version = '0.1.7'
+plugin.version = '0.1.8'
 
 export default plugin
 

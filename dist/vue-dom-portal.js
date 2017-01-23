@@ -1,5 +1,5 @@
 /*!
- * vue-dom-portal v0.1.7 
+ * vue-dom-portal v0.1.8 
  * (c) 2017 Caleb Roseland
  * Released under the MIT License.
  */
@@ -95,9 +95,6 @@ var directive = {
   unbind: function unbind (el, ref) {
     var value = ref.value;
 
-    var ref$1 = homes.get(el);
-    var hasMovedOut = ref$1.hasMovedOut; // recall where home is
-    if (hasMovedOut) { el.parentNode.removeChild(el); }
     homes.delete(el);
   }
 };
@@ -109,7 +106,7 @@ function plugin (Vue, ref) {
   Vue.directive(name, directive);
 }
 
-plugin.version = '0.1.7';
+plugin.version = '0.1.8';
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(plugin);
